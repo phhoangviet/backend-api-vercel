@@ -7,14 +7,14 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
     try {
       await this.$connect();
       const userDataSeed = new Promise<User[]>((resolve) => {
-        fs.readFile('src/seeds/users.json', 'utf8', function (err, data) {
+        fs.readFile('./seeds/users.json', 'utf8', function (err, data) {
           if (err) throw err;
           const obj: User[] = JSON.parse(data);
           resolve(obj);
         });
       }).then((_res) => _res);
       const MeetingsDataSeed = new Promise<Meetings[]>((resolve) => {
-        fs.readFile('src/seeds/meetings.json', 'utf8', function (err, data) {
+        fs.readFile('./seeds/meetings.json', 'utf8', function (err, data) {
           if (err) throw err;
           const obj: Meetings[] = JSON.parse(data);
           resolve(obj);
