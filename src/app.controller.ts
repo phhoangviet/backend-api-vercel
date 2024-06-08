@@ -31,7 +31,7 @@ export class AppController {
   async getUsers(
     @Param('offset') offset: number,
     @Param('limit') limit: number,
-  ): Promise<User[]> {
+  ): Promise<{ users: User[]; total: number }> {
     return this.userService.users({
       skip: offset,
       take: limit,
