@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { UserService } from './users.service';
 import { MeetingService } from './meetings.service';
@@ -29,12 +29,11 @@ export class AppController {
 
   @Get('users')
   async getUsers(
-    @Param('offset') offset: number,
-    @Param('limit') limit: number,
+    @Query() query: { offset: number; limit: number },
   ): Promise<{ users: User[]; total: number }> {
     return this.userService.users({
-      skip: offset,
-      take: limit,
+      skip: +query?.offset,
+      take: +query?.limit,
     });
   }
 }
